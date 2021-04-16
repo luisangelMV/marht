@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <section class="user-form-container">
+        <form [formGroup]="login" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="panel-heading">
+                <div class="panel-title">Iniciar Sesión</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-20px"><a href="account/recover">¿olvidó su
+                        contraseña?</a></div>
+            </div>
+
+            <div class="panel-body">
+
+                <div class="input-group mb-3">
+                    <div class="col">
+                        <input formControlName="email" type="text" class="form-control" placeholder=" email"
+                            [ngClass]="{'is-valid': f.email.valid, 'is-invalid': f.email.invalid && f.email.dirty}">
+                        <div *ngIf="f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.email">correo no valido</div>
+                            <div *ngIf="f.email.errors.noMatchEmail">no se encotro el correo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="col">
+                        <input type="password" class="form-control" placeholder="password" formControlName="password"
+                            [ngClass]="{ 'is-invalid': f.password.invalid && f.password.dirty}">
+                        <div *ngIf="f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Campo requerido</div>
+                            <div *ngIf="f.password.errors.passwordIncorrect">Contraseña incorrecta</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 control">
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                            No tiene una cuenta! <a href="aacount/register">Registrate aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+
+<modal #modal [modalConfig]="{ hideDismissButton: true, modalTitle: 'Verificación de correo', closeButtonLabel: 'cerrar' }">
+    <h6>Su correo aún no ha sido verificado o se a solicitado cambio de contraseña, revise su correo para poder iniciar sesión</h6>
+</modal>

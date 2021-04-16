@@ -1,0 +1,165 @@
+<div class="row justify-content-center">
+    <section class="user-form-container">
+        <div>
+            <div class="panel-title"><b>Regístrate</b></div>
+            <div style="float:right; font-size: 85%; position: relative; top:-20px">
+                <a id="signinlink" href="account/login">Iniciar Sesión</a>
+            </div>
+        </div>
+
+        <form [formGroup]="register" (ngSubmit)="onSubmit()" autocomplete="off">
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <label class=" control-label">Nombre:</label>
+                    <input type="text" formControlName="name" class="form-control" pattern="[a-zA-Z ]*"
+                        placeholder="Nombre"
+                        [ngClass]="{ 'is-invalid': f.name.dirty && f.name.errors, 'is-valid': f.name.valid }">
+                    <div *ngIf="f.name.errors && f.name.dirty" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Por favor ingrese su nombre</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <label for="lastName" class="control-label">Apellidos:</label>
+                    <input type="text" formControlName="lastName" class="form-control" pattern="[a-zA-Z ]*"
+                        placeholder="Apellidos"
+                        [ngClass]="{'is-invalid': f.lastName.dirty && f.lastName.errors, 'is-valid': f.lastName.valid }">
+                    <div *ngIf="f.lastName.dirty && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">Por favor ingrese su ampellido</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <label for="email" class="control-label">Email:</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{'is-invalid': f.email.dirty && f.email.errors, 'is-valid': f.email.valid &&
+                    this.emailComp !== f.email.value }">
+                    <div *ngIf="f.email.dirty && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.email">Por favor ingrese un correo valido</div>
+                        <div *ngIf="f.email.errors.required">El email es requerido</div>
+                        <div *ngIf="f.email.errors.nounique">El email esta en uso </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <Label for="company" class="control-label">compañia:</Label>
+                    <input type="text" formControlName="company" class="form-control" placeholder="compañia"
+                        [ngClass]="{'is-invalid': f.company.dirty && f.company.errors, 'is-valid': f.company.valid}">
+                    <div *ngIf="f.company.errors" class="invalid-feedback">
+                        <div *ngIf="f.company.errors.required">El campo es obligatorio</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3 col">
+                <div class="input-group-prepend">
+                    <label for="state" class="input-group-text badge-primary">Estado:</label>
+                </div>
+                <select formControlName="state" class="custom-select" pattern="[a-zA-Z ]*"
+                    [ngClass]="{ ' is-invalid': f.state.dirty && f.state.invalid, ' is-valid': f.state.valid }">
+                    <option [value]="null" hidden>Seleccione uno...</option>
+                    <option value="Aguascalientes">Aguascalientes</option>
+                    <option value="Baja California">Baja California</option>
+                    <option value="Baja California Sur">Baja California Sur</option>
+                    <option value="Campeche">Campeche</option>
+                    <option value="Chiapas">Chiapas</option>
+                    <option value="Chihuahua">Chihuahua</option>
+                    <option value="CDMX">Ciudad de México</option>
+                    <option value="Coahuila">Coahuila</option>
+                    <option value="Colima">Colima</option>
+                    <option value="Durango">Durango</option>
+                    <option value="Estado de México">Estado de México</option>
+                    <option value="Guanajuato">Guanajuato</option>
+                    <option value="Guerrero">Guerrero</option>
+                    <option value="Hidalgo">Hidalgo</option>
+                    <option value="Jalisco">Jalisco</option>
+                    <option value="Michoacán">Michoacán</option>
+                    <option value="Morelos">Morelos</option>
+                    <option value="Nayarit">Nayarit</option>
+                    <option value="Nuevo León">Nuevo León</option>
+                    <option value="Oaxaca">Oaxaca</option>
+                    <option value="Puebla">Puebla</option>
+                    <option value="Querétaro">Querétaro</option>
+                    <option value="Quintana Roo">Quintana Roo</option>
+                    <option value="San Luis Potosí">San Luis Potosí</option>
+                    <option value="Sinaloa">Sinaloa</option>
+                    <option value="Sonora">Sonora</option>
+                    <option value="Tabasco">Tabasco</option>
+                    <option value="Tamaulipas">Tamaulipas</option>
+                    <option value="Tlaxcala">Tlaxcala</option>
+                    <option value="Veracruz">Veracruz</option>
+                    <option value="Yucatán">Yucatán</option>
+                    <option value="Zacatecas">Zacatecas</option>
+
+                </select>
+                <div *ngIf="f.state.dirty && f.state.errors" class="invalid-feedback">
+                    <div *ngIf="f.state.errors">Seleccione un estado válido.</div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <label class="control-label">numero celular:</label>
+                    <input type="tel" formControlName="phone" pattern="[0-9]*" class="form-control"
+                        placeholder="Telefono celular"
+                        [ngClass]="{'is-invalid': f.phone.dirty && f.phone.errors, 'is-valid': f.phone.valid }">
+                    <div *ngIf=" f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.required">Este campo es requerido</div>
+                        <div *ngIf="f.phone.errors.pattern">Ingrese unicamente numeros</div>
+                        <div *ngIf="f.phone.errors.maxlength">Son mas de diez digitos</div>
+                        <div *ngIf="f.phone.errors.minlength">El numero esta incompleto</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <label class="control-label">contraseña:</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        placeholder="******" [ngClass]="{'is-invalid': f.password.dirty && f.password.errors, 
+                        'is-valid': f.password.valid}">
+                    <div *ngIf="f.password.errors " class="invalid-feedback">
+                        <div *ngIf="f.password.errors?.required">ingrese una contraseña</div>
+                        <div *ngIf="f.password.errors?.minlength">el minimo de caracteres son 6</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="input-group mb-3">
+                <div class="col">
+                    <label for="confirmPassword" class="control-label">confirmar contraseña:</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" placeholder="******"
+                        [ngClass]="{'is-invalid': f.confirmPassword.dirty && (f.confirmPassword.errors  && f.password.dirty), 
+                        'is-valid': f.confirmPassword.valid }">
+                    <div *ngIf="f.confirmPassword.dirty && (f.confirmPassword.errors)" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.mustMatch">no coinciden las contraseñas</div>
+                        <div *ngIf="f.confirmPassword.errors?.required">ingrese una contraseña</div>
+                        <div *ngIf="f.confirmPassword.errors?.minlength">el minimo de caracteres son 6</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3 mx-auto">
+                <ngx-recaptcha2 [siteKey]="siteKey" formControlName="recaptcha"></ngx-recaptcha2>
+            </div>
+
+            <div class="input-group">
+                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<modal #modal
+    [modalConfig]="{ hideDismissButton: true, modalTitle: this.tituloModal, closeButtonLabel:'iniciar Sesion', onDismiss:'iniciarSesion()' }">
+    <p class="align">{{parrafoModal}}</p>
+</modal>

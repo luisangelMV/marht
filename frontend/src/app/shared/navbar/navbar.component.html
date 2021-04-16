@@ -1,0 +1,47 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand">MARHT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index">Inicio</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="account">
+            <li class="nav-item">
+                <a class="nav-link" href='console'>Consola</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="account">
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="account.role === Role.Admin" href='admin'>Admin</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="account">
+            <li class="nav-item">
+                <a class="nav-link" href="" (click)="logout()">Cerrar Sesión</a>
+            </li>
+        </ul>
+
+
+        <ul class='navbar-nav ml-auto' *ngIf="!account">
+            <li class="nav-item">
+                <a class="nav-link" href='account/login'>Iniciar Sesión</a>
+            </li>
+        </ul>
+
+        <ul class='navbar-nav ml-auto' *ngIf="!account">
+            <li class="nav-item">
+                <a class="nav-link" href='account/register'>Registrarse</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

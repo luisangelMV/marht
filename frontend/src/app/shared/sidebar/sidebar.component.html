@@ -1,0 +1,70 @@
+<body>
+    <nav class="main-menu">
+        <ul>
+            <li>
+                <span class="head">Marht</span>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="/profile" *ngIf=" this.ruta !== '/profile'">
+                    <fa-icon [icon]="fauser" class="nav-icon"></fa-icon>
+                    <span class="nav-text l">
+                        Perfil
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="/admin" *ngIf="(account.role === Role.Admin) && this.ruta !== '/admin'">
+                    <fa-icon [icon]="faAdmin" class="nav-icon"></fa-icon>
+                    <span class="nav-text 1">
+                        Admin
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="/console" *ngIf="this.ruta !== '/console'">
+                    <fa-icon [icon]="faChart" class="nav-icon"></fa-icon>
+                    <span class="nav-text l">
+                        Consola
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="/device" *ngIf="this.ruta !== '/device'">
+                    <fa-icon [icon]="faDevice" class="nav-icon"></fa-icon>
+                    <span class="nav-text l">
+                        dispositivos
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="/" *ngIf="this.ruta !== '/'">
+                    <fa-icon [icon]="faHome" class="nav-icon"></fa-icon>
+                    <span class="nav-text l">
+                        Inicio
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="logout">
+            <li>
+                <a (click)="logout()">
+                    <fa-icon [icon]="fapower" class="nav-icon"></fa-icon>
+                    <span class="nav-text">
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</body>

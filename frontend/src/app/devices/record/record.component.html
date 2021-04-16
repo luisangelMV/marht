@@ -1,0 +1,114 @@
+<!-- <div class="container-fluid" style="margin-left: 50px;">
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>Modelo</th>
+                <th>Telemetria</th>
+                <th>Fecha de registro</th>
+                <th>Eliminar / Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let device of devices">
+                <td>{{device.idModel}}</td>
+                <td>{{device.telemetry.method}}</td>
+                <td>{{ device.creationDate | date:'yyyy/MM/dd HH:mm:ss'}}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm mr-sm-4">
+                        <fa-icon [icon]="faDelete" [fixedWidth]="true" class="nav-icon"></fa-icon>
+                    </button>
+                    <button class="btn btn-primary btn-sm">
+                        <fa-icon [icon]="faPencil" [fixedWidth]="true" class="nav-icon"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<div style="margin-left: 70px; margin-top: 20px; margin-right: 20px;">
+    <ngx-datatable [loadingIndicator]="loadingIndicator" class="material full" [rows]="devices" [columns]="columns" [columnMode]="ColumnMode.force"
+        [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10" [messages]="my_messages">
+
+        <ngx-datatable-column name='Modelo' prop='idModel'></ngx-datatable-column>
+        <ngx-datatable-column name="Version de software" prop='versionSoftware'></ngx-datatable-column>
+        <ngx-datatable-column name='Telemetria' prop='telemetry.method'></ngx-datatable-column>
+        <ngx-datatable-column name='Fecha de registro' prop='creationDate'>
+            <ng-template let-value='value' ngx-datatable-cell-template>
+                {{ value | date:'yyyy/MM/dd HH:mm:ss'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name='Sensor' prop='model: '>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                <div style="font-size:large; margin-left: 10%;">
+                {{value? value : "-"}}
+                </div>
+                
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name='Registro' prop='id'>
+            <ng-template let-value='value' ngx-datatable-cell-template>
+                <button class="btn btn-primary btn-sm" (click)="openRegistro(value)">
+                    <fa-icon [icon]="faFile" [fixedWidth]="true"></fa-icon>
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name='Opciones'>
+            <ng-template let-row='row' ngx-datatable-cell-template>
+                <div class="form-inline">
+                    <button class="btn btn-primary btn-sm mr-sm-2" (click)="openModal(contentEdit)">
+                        <fa-icon [icon]="faPencil" [fixedWidth]="true"></fa-icon>
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="openModal(contentDelete, row.idModel, row.id)">
+                        <fa-icon [icon]="faDelete" [fixedWidth]="true"></fa-icon>
+                    </button>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</div>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar dispositivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- <form [formGroup]="addDevice" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Numero de Modelo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="idModel">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+            </div>
+        </form> -->
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #contentDelete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">eliminar dispositivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Seguro que desea elimiar el dispositivo</p>{{this.idModel }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteDevice(this.id)">Aceptar</button>
+    </div>
+</ng-template>

@@ -1,0 +1,88 @@
+<div class=" container-fluid">
+    <div class="card" style="margin-left: 50px; margin-top: 30px; margin-right: 1%;">
+        <div class="card-body">
+            <nav class="nav">
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <button class="btn btn-outline-primary" (click)="openModal(createGroupModal)">Crear nuevo
+                            grupo</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div style="margin-top: 10%;"></div>
+    <div class="svg">
+        <h6>no se han encontrado dispositivos asosiados</h6>
+    </div>
+</div>
+
+<ng-template #createGroupModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="editProfileLabel">Crear nuevo grupo</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <!-- <div class="alert alert-warning" role="alert" *ngIf="this.message !== '' && this.valid === false">
+            <fa-icon [icon]="faAlert" class="nav-icon"></fa-icon>
+            {{this.message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="this.message !== '' && this.valid === true">
+            {{this.message}}
+            <button type="button" class="close" data-dismiss="alert" autocomplete="off" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div> -->
+
+        <form [formGroup]="createGroupForm" id="createGroupForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+            <div class="row mb-3">
+                <div class="col input-group input-group-sm pr-1">
+                    <input type="text" class="form-control" placeholder="Nombre de grupo" formControlName="nameModule"
+                    [ngClass]="{'is-valid': f.nameModule.valid, 'is-invalid': f.nameModule.invalid && f.nameModule.dirty}">
+                </div>
+                <div class="col input-group input-group-sm pl-1">
+                    <input type="text" class="form-control" placeholder="Ubicación" formControlName="ubication"
+                    [ngClass]="{'is-valid': f.ubication.valid, 'is-invalid': f.ubication.invalid && f.ubication.dirty}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col input-group input-group-sm pr-1">
+                    <input type="text" pattern="[0-9]*" class="form-control" placeholder="Numero de sim" formControlName="numberModule"
+                    [ngClass]="{'is-valid': f.numberModule.valid, 'is-invalid': f.numberModule.invalid && f.numberModule.dirty}">
+                </div>
+                <div class="col input-group input-group-sm pl-1">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text badge-primary">Numero de dispositivos</label>
+                    </div>
+                    <input type="number" class="form-control" formControlName="numberofDevice"
+                    [ngClass]="{'is-valid': f.numberofDevice.valid && f.numberofDevice.dirty, 'is-invalid': f.numberofDevice.invalid && f.numberofDevice.dirty}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col input-group input-group-sm pr-1">
+                    <input type="text" class="form-control" formControlName="nameWifi" placeholder="usuario wifi"
+                    [ngClass]="{'is-valid': f.nameWifi.valid, 'is-invalid': f.nameWifi.invalid && f.nameWifi.dirty}">
+                </div>
+                <div class="col input-group input-group-sm pl-1">
+                    <input type="text" class="form-control" formControlName="passwordWifi" placeholder="contraseña"
+                    [ngClass]="{'is-valid': f.passwordWifi.valid, 'is-invalid': f.passwordWifi.invalid && f.passwordWifi.dirty}">
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+        <button type="submit" class="btn btn-primary" form="createGroupForm">Aceptar</button>
+    </div>
+</ng-template>

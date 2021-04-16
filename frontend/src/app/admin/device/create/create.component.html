@@ -1,0 +1,74 @@
+<form [formGroup]="device" (ngSubmit)="onSubmit()" autocomplete="off" class="card">
+    <div class="card-body">
+        <div class="form-row align-items-end">
+            <div class="form-group col-auto">
+                <label>modelo de Microcontrolador</label>
+                <div class="input-group input-group-sm">
+                    <input formControlName="microcontroller" type="text" class="form-control" placeholder=""
+                        [ngClass]="{'is-invalid': f.microcontroller.dirty && f.microcontroller.errors, 'is-valid': f.microcontroller.valid}">
+                </div>
+            </div>
+
+            <div class="form-group offset-1 col-sm-3">
+                <label>Software</label>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text badge-primary">version:</label>
+                    </div>
+                    <select formControlName="versionSoftware" class="custom-select"
+                        [ngClass]="{ ' is-invalid': f.versionSoftware.dirty && f.versionSoftware.invalid, 'is-valid': f.versionSoftware.valid}">
+                        <option value="1.0">v1.0</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-end" formGroupName="telemetry">
+            <div class="form-group col-auto">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text badge-primary">comunicacion:</label>
+                    </div>
+                    <select formControlName="method" class="custom-select" (change)="change()"
+                        [ngClass]="{ ' is-invalid': this.h.method.dirty && this.h.method.invalid, ' is-valid': this.h.method.valid }">
+                        <option [value]="null" hidden>Seleccione uno...</option>
+                        <option value="gprs">Gprs</option>
+                        <option value="wifi">Wifi</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-auto" *ngIf="this.h.method.value === 'gprs'">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text badge-primary">modelo:</label>
+                    </div>
+                    <select formControlName="gprsDevice" class="custom-select"
+                        [ngClass]="{ ' is-invalid': h.gprsDevice.dirty && h.gprsDevice.invalid}">
+                        <option value="sim800" selected>Sim800</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-auto" *ngIf="this.h.method.value === 'gprs'">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" formControlName="imei" placeholder="imei"
+                    [ngClass]="{ ' is-invalid': h.imei.dirty && h.imei.invalid, ' is-valid': h.imei.valid && h.imei.dirty }">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary btn-block">Agregar dispositivo</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<modal #modal
+    [modalConfig]="{ hideDismissButton: true, modalTitle: 'Dispositivvo creado', closeButtonLabel:'Aceptar' }">
+    <p class="align">{{parrafoModal}}</p>
+</modal>

@@ -1,0 +1,30 @@
+<section class="row justify-content-center">
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="recover" autocomplete="off" class="user-form-container">
+        <div class="panel-title"><b>Recuperar contraseña</b></div>
+        <div style="float:right; font-size: 80%; position: relative; top:-20px"><a href="login">Iniciar Sesión</a></div>
+
+        <div class="input-group mb-4">
+            <div class="col ">
+                <input formControlName="email" type="text" class="form-control" placeholder=" email"
+                    [ngClass]="{'is-valid': f.email.valid, 'is-invalid': f.email.invalid && f.email.dirty}">
+                <div *ngIf="f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.email">correo no valido</div>
+                    <div *ngIf="f.email.errors.noMatchEmail">no se encotro el correo</div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:10px" class="col-sm-12 controls">
+            <button [disabled]='activateButton' id="btn-login" type="submit" class="btn btn-primary btn-block">Enviar</button>
+        </div>
+        <div class="col-md-12 control"
+            style="margin-top:10px; border-top:1px solid#888; padding-top:10px; font-size:85%">
+            No tiene una cuenta! <a href="account/register">Registrate aquí</a>
+        </div>
+    </form>
+</section>
+
+<modal #modal [modalConfig]="{ hideDismissButton: true, modalTitle: 'aviso', closeButtonLabel: 'Cerrar' }">
+    <h6>Se ha enviado la solicitud a tu correo, ingrese para restablecer su contraseña.</h6>
+    <h6>tiene 24 horas para cambiar la contraseña.</h6>
+</modal>
