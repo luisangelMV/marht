@@ -7,6 +7,8 @@ import { ListComponent } from './list/list.component';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { RecordComponent } from './record/record.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChartComponent } from './chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -15,13 +17,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConsoleComponent,
     ListComponent,
     AddDeviceComponent,
-    RecordComponent
+    RecordComponent,
+    ChartComponent
   ],
   imports: [
     CommonModule,
     ConsoleRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ]
 })
 export class ConsoleModule { }

@@ -15,10 +15,11 @@ import { appInitializer } from './helpers/app.initializer';
 import { AccountService } from './services';
 import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ChartsModule } from 'ng2-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { spinnerInterceptor } from './helpers/spinner.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -37,9 +38,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgbModule,
     SharedModule,
     FontAwesomeModule,
-    ChartsModule,
     NgxSpinnerModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ChartsModule
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
@@ -48,7 +49,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     { provide: HTTP_INTERCEPTORS, useClass: spinnerInterceptor, multi: true }
   ],
   exports: [
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartsModule
   ],
   bootstrap: [AppComponent]
 })
