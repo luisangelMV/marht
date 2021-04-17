@@ -1,11 +1,5 @@
-<div>
-    <div style="display: block">
-      <canvas baseChart
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType">
-      </canvas>
-    </div>
-  </div>
+<div style="display: block">
+    <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [chartType]="barChartType"
+        [options]="barChartOptions">
+    </canvas>
+</div>

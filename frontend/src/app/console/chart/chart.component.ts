@@ -17,9 +17,11 @@ export class ChartComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
+
   public barChartType = 'line';
-  public barChartLegend = true;
   
+  public barChartLegend = true;
+
   public lineChartLabels: Array<any> = ['Enero', 'Febrero', 'Marzo', 'Abril'];
   ngOnInit() {
   }
