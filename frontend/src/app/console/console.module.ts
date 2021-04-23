@@ -7,7 +7,6 @@ import { ListComponent } from './list/list.component';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { RecordComponent } from './record/record.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ChartComponent } from './chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 
 
@@ -17,8 +16,7 @@ import { ChartsModule } from 'ng2-charts';
     ConsoleComponent,
     ListComponent,
     AddDeviceComponent,
-    RecordComponent,
-    ChartComponent
+    RecordComponent
   ],
   imports: [
     CommonModule,

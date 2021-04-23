@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { pipe } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { Account } from 'src/app/models';
-import { AccountService, ConsoleService } from 'src/app/services';
+import { ConsoleService } from 'src/app/services';
 import { SocketService } from 'src/app/services/socket/socket.service';
 
 @Component({
@@ -15,22 +14,23 @@ import { SocketService } from 'src/app/services/socket/socket.service';
 })
 export class ListComponent implements OnInit {
   createGroupForm: FormGroup;
-  devices: any;
+  devices: any[] = [];
+  groups: any[] = [];
 
-  constructor(
-    private router: Router,
-    private consoleService: ConsoleService,
-    private modalService: NgbModal,
-    private fb: FormBuilder,
-    private Socket: SocketService
-  ) {
+    constructor(
+      private router: Router,
+      private consoleService: ConsoleService,
+      private modalService: NgbModal,
+      private fb: FormBuilder,
+      private Socket: SocketService
+    ) {
   }
 
   ngOnInit(): void {
     this.getdata();
     this.Socket.on(this.consoleService.account.id).subscribe(data => {
       console.log(data);
-      
+
     });
   }
 
@@ -79,7 +79,9 @@ export class ListComponent implements OnInit {
       .pipe()
       .subscribe({
         next: next => {
-          console.log(next)
+          this.groups = next['groups'];
+          this.devices = next['device'];
+          
         },
         error: error => {
           console.log(error);

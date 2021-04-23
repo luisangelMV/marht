@@ -12,10 +12,28 @@
         </div>
     </div>
 
-    <div style="margin-top: 10%;"></div>
-    <div class="svg">
-        <h6>no se han encontrado dispositivos asosiados</h6>
+    <div style="margin-top: 2%; margin-left: 50px; margin-right: 1%;" *ngIf="this.devices.length !== 0">
+        <div *ngFor="let device of this.devices" style="margin-top: 1%;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{device.idModel}}</h5>
+                    <p class="card-text">{{device.microcontroller}}</p>
+                    <div>
+                        <app-chart [chartdata]="device.record"></app-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div style="margin-top: 10%;"></div>
+
+    <div *ngIf="this.groups.length === 0">
+        <div class="svg">
+            <h6>no se han encontrado dispositivos asosiados</h6>
+        </div>
+    </div>
+
 </div>
 
 <ng-template #createGroupModal let-modal>
@@ -46,35 +64,36 @@
             <div class="row mb-3">
                 <div class="col input-group input-group-sm pr-1">
                     <input type="text" class="form-control" placeholder="Nombre de grupo" formControlName="nameModule"
-                    [ngClass]="{'is-valid': f.nameModule.valid, 'is-invalid': f.nameModule.invalid && f.nameModule.dirty}">
+                        [ngClass]="{'is-valid': f.nameModule.valid, 'is-invalid': f.nameModule.invalid && f.nameModule.dirty}">
                 </div>
                 <div class="col input-group input-group-sm pl-1">
                     <input type="text" class="form-control" placeholder="Ubicación" formControlName="ubication"
-                    [ngClass]="{'is-valid': f.ubication.valid, 'is-invalid': f.ubication.invalid && f.ubication.dirty}">
+                        [ngClass]="{'is-valid': f.ubication.valid, 'is-invalid': f.ubication.invalid && f.ubication.dirty}">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col input-group input-group-sm pr-1">
-                    <input type="text" pattern="[0-9]*" class="form-control" placeholder="Numero de sim" formControlName="numberModule"
-                    [ngClass]="{'is-valid': f.numberModule.valid, 'is-invalid': f.numberModule.invalid && f.numberModule.dirty}">
+                    <input type="text" pattern="[0-9]*" class="form-control" placeholder="Numero de sim"
+                        formControlName="numberModule"
+                        [ngClass]="{'is-valid': f.numberModule.valid, 'is-invalid': f.numberModule.invalid && f.numberModule.dirty}">
                 </div>
                 <div class="col input-group input-group-sm pl-1">
                     <div class="input-group-prepend">
                         <label class="input-group-text badge-primary">Numero de dispositivos</label>
                     </div>
                     <input type="number" class="form-control" formControlName="numberofDevice"
-                    [ngClass]="{'is-valid': f.numberofDevice.valid && f.numberofDevice.dirty, 'is-invalid': f.numberofDevice.invalid && f.numberofDevice.dirty}">
+                        [ngClass]="{'is-valid': f.numberofDevice.valid && f.numberofDevice.dirty, 'is-invalid': f.numberofDevice.invalid && f.numberofDevice.dirty}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col input-group input-group-sm pr-1">
                     <input type="text" class="form-control" formControlName="nameWifi" placeholder="usuario wifi"
-                    [ngClass]="{'is-valid': f.nameWifi.valid, 'is-invalid': f.nameWifi.invalid && f.nameWifi.dirty}">
+                        [ngClass]="{'is-valid': f.nameWifi.valid, 'is-invalid': f.nameWifi.invalid && f.nameWifi.dirty}">
                 </div>
                 <div class="col input-group input-group-sm pl-1">
                     <input type="text" class="form-control" formControlName="passwordWifi" placeholder="contraseña"
-                    [ngClass]="{'is-valid': f.passwordWifi.valid, 'is-invalid': f.passwordWifi.invalid && f.passwordWifi.dirty}">
+                        [ngClass]="{'is-valid': f.passwordWifi.valid, 'is-invalid': f.passwordWifi.invalid && f.passwordWifi.dirty}">
                 </div>
             </div>
 
