@@ -24,7 +24,7 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {
 
     this.lineChartData = [
-      { data: this.getArrayValue(this.chartdata, 'LpS'), label: 'litros por segundo' },
+      { data: this.getArrayValue(this.chartdata, 'LpS'), label: 'litros por segundo' }
       // { data: this.getArrayValue(this.chartdata, 'Mc'), label: 'metros cubicos'}
     ];
     this.lineChartLabels = this.getArrayValue(this.chartdata, 'time');

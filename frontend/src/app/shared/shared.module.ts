@@ -5,7 +5,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ModalComponent } from './modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartComponent } from './chart/chart.component';
-import { DynamicDirective } from './dynamic/dynamic.directive';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,8 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarComponent,
     SidebarComponent,
     ModalComponent,
-    ChartComponent,
-    DynamicDirective
+    ChartComponent
   ],
   entryComponents: [
     ChartComponent
