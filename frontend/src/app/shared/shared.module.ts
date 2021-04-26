@@ -4,8 +4,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ModalComponent } from './modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ChartComponent } from './chart/chart.component';
-import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -14,23 +12,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    ModalComponent,
-    ChartComponent
-  ],
-  entryComponents: [
-    ChartComponent
+    ModalComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
-    ChartsModule,
     NgbModule
   ],
   exports: [
     NavbarComponent,
     SidebarComponent,
-    ModalComponent,
-    ChartComponent
+    ModalComponent
   ]
 })
 export class SharedModule { }

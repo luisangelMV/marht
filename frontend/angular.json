@@ -21,8 +21,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "socket.io-client",
-              "chart.js"
+              "socket.io-client"
             ],
             "outputPath": "dist/frontend",
             "index": "src/index.html",
@@ -40,10 +39,12 @@
               "node_modules/@swimlane/ngx-datatable/themes/material.css",
               "node_modules/@swimlane/ngx-datatable/assets/icons.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/chart.js/dist/Chart.js"

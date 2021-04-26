@@ -18,7 +18,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { spinnerInterceptor } from './helpers/spinner.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -39,8 +38,7 @@ import { ChartsModule } from 'ng2-charts';
     SharedModule,
     FontAwesomeModule,
     NgxSpinnerModule,
-    NgxDatatableModule,
-    ChartsModule
+    NgxDatatableModule
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
@@ -49,8 +47,7 @@ import { ChartsModule } from 'ng2-charts';
     { provide: HTTP_INTERCEPTORS, useClass: spinnerInterceptor, multi: true }
   ],
   exports: [
-    FontAwesomeModule,
-    ChartsModule
+    FontAwesomeModule
   ],
   bootstrap: [AppComponent]
 })
