@@ -1,12 +1,13 @@
 const { Schema, model } = require('mongoose');
 
-
 var deviceShema = new Schema({
     idModel: { type: String, require: true },
     creationDate: { type: Date },
     account: { type: Schema.Types.ObjectId, ref: 'Account' },
     microcontroller: { type: String, require: true, default: 'esp32' },
     versionSoftware: { type: String, require: true, default: '1.0' },
+    ubication: { type: String },
+    nameModule: { type: String },
     telemetry: {
         method: { type: String, require: true },
         userWifi: String,
@@ -16,15 +17,18 @@ var deviceShema = new Schema({
         number: String
     },
     Sensor: {
-        model: { type: String, require: true },
+        type: { type: String },
+        maker: { type: String },
+        model: { type: String },
+        serialNumber: { type: String },
         size: { type: Number }
     },
-    createdByIp: { type: String, required: true },
-    record: [{
-        time: { type: Date, default: Date.now },
-        LpS: Number,
-        Mc: Number
-    }]
+    createdByIp: { type: String, required: true }
+    // record: [{
+    //     time: { type: Date, default: Date.now },
+    //     LpS: Number,
+    //     Mc: Number
+    // }]
 }, {
     timestamps: true
 });
@@ -37,4 +41,5 @@ deviceShema.set('toJSON', {
         delete ret._id;
     }
 });
+
 module.exports = model('Device', deviceShema);

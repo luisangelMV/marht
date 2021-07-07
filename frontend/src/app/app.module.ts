@@ -17,7 +17,6 @@ import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { spinnerInterceptor } from './helpers/spinner.interceptor';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -37,8 +36,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgbModule,
     SharedModule,
     FontAwesomeModule,
-    NgxSpinnerModule,
-    NgxDatatableModule
+    NgxSpinnerModule
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },

@@ -1,48 +1,89 @@
 <div class=" container-fluid">
-    <div class="card" style="margin-left: 50px; margin-top: 30px; margin-right: 1%;">
+    <div style="margin-top: 2%; margin-left: 50px; margin-right: 1%;" *ngIf="this.devices.length !== 0">
         <div class="card-body">
             <nav class="nav">
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <button class="btn btn-outline-primary" (click)="openModal(createGroupModal)">Crear nuevo
-                            grupo</button>
+                        <button type="button" class="btn btn-outline-primary"
+                            (click)="openModal(addDeviceModal)">Asociar nuevo dispositivo</button>
                     </li>
                 </ul>
             </nav>
         </div>
-    </div>
 
-    <div style="margin-top: 2%; margin-left: 50px; margin-right: 1%;" *ngIf="this.devices.length !== 0">
+        <div class="card">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-auto mr-auto">
+                            <p>Nombre</p>
+                        </div>
+                        <div class="col-auto mr-auto">
+                            <p>Ubicación</p>
+                        </div>
+                        <div class="col-auto mr-auto">
+                            <p>Modulo</p>
+                        </div>
+                        <div class="col-auto">
+                            <p>Registro</p>
+                        </div>
+                        <div class="col-auto">
+                            <p>Opciones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div *ngFor="let device of this.devices" style="margin-top: 1%;">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{device.idModel}}</h5>
-                    <p class="card-text">{{device.microcontroller}}</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto mr-auto">
+                                <p class="card-title">{{device.idModel}}</p>
+                            </div>
+                            <div class="col-auto mr-auto">
+                                <p class="card-text">{{device.ubication}}</p>
+                            </div>
+                            <div class="col-auto mr-auto">
+                                <p class="card-text">{{device.nameModule}}</p>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary btn-sm" (click)="openRegistro(device.id)">
+                                    <fa-icon [icon]="faFile" [fixedWidth]="true"></fa-icon>
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary btn-sm mr-sm-2"
+                                    (click)="openModal(contentEdit, device.idModel, device.id, device)">
+                                    <fa-icon [icon]="faPencil" [fixedWidth]="true"></fa-icon>
+                                </button>
+                                <button class="btn btn-danger btn-sm"
+                                    (click)="openModal(contentDelete, device.idModel, device.id)">
+                                    <fa-icon [icon]="faDelete" [fixedWidth]="true"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div style="margin-top: 10%;"></div>
-
-    <div *ngIf="this.groups.length === 0">
-        <div class="svg">
-            <h6>no se han encontrado dispositivos asosiados</h6>
-        </div>
-    </div>
-
 </div>
 
-<ng-template #createGroupModal let-modal>
+<ng-template #addDeviceModal let-modal>
     <div class="modal-header">
-        <h5 class="modal-title" id="editProfileLabel">Crear nuevo grupo</h5>
+        <h5 class="modal-title" id="editProfileLabel">asociar nuevo dispositivo</h5>
         <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 
     <div class="modal-body">
-        <!-- <div class="alert alert-warning" role="alert" *ngIf="this.message !== '' && this.valid === false">
+        <div class="alert alert-warning" role="alert" *ngIf="this.message !== '' && this.valid === false">
             <fa-icon [icon]="faAlert" class="nav-icon"></fa-icon>
             {{this.message}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -51,54 +92,73 @@
         </div>
         <div class="alert alert-success" role="alert" *ngIf="this.message !== '' && this.valid === true">
             {{this.message}}
-            <button type="button" class="close" data-dismiss="alert" autocomplete="off" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div> -->
-
-        <form [formGroup]="createGroupForm" id="createGroupForm" (ngSubmit)="onSubmit()" autocomplete="off">
-
-            <div class="row mb-3">
-                <div class="col input-group input-group-sm pr-1">
-                    <input type="text" class="form-control" placeholder="Nombre de grupo" formControlName="nameModule"
-                        [ngClass]="{'is-valid': f.nameModule.valid, 'is-invalid': f.nameModule.invalid && f.nameModule.dirty}">
-                </div>
-                <div class="col input-group input-group-sm pl-1">
-                    <input type="text" class="form-control" placeholder="Ubicación" formControlName="ubication"
-                        [ngClass]="{'is-valid': f.ubication.valid, 'is-invalid': f.ubication.invalid && f.ubication.dirty}">
+        </div>
+        <form [formGroup]="addDevice" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Numero de Modelo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="idModel">
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col input-group input-group-sm pr-1">
-                    <input type="text" pattern="[0-9]*" class="form-control" placeholder="Numero de sim"
-                        formControlName="numberModule"
-                        [ngClass]="{'is-valid': f.numberModule.valid, 'is-invalid': f.numberModule.invalid && f.numberModule.dirty}">
-                </div>
-                <div class="col input-group input-group-sm pl-1">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text badge-primary">Numero de dispositivos</label>
-                    </div>
-                    <input type="number" class="form-control" formControlName="numberofDevice"
-                        [ngClass]="{'is-valid': f.numberofDevice.valid && f.numberofDevice.dirty, 'is-invalid': f.numberofDevice.invalid && f.numberofDevice.dirty}">
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
             </div>
-
-            <div class="row">
-                <div class="col input-group input-group-sm pr-1">
-                    <input type="text" class="form-control" formControlName="nameWifi" placeholder="usuario wifi"
-                        [ngClass]="{'is-valid': f.nameWifi.valid, 'is-invalid': f.nameWifi.invalid && f.nameWifi.dirty}">
-                </div>
-                <div class="col input-group input-group-sm pl-1">
-                    <input type="text" class="form-control" formControlName="passwordWifi" placeholder="contraseña"
-                        [ngClass]="{'is-valid': f.passwordWifi.valid, 'is-invalid': f.passwordWifi.invalid && f.passwordWifi.dirty}">
-                </div>
-            </div>
-
-
         </form>
     </div>
+</ng-template>
+
+
+<ng-template #contentDelete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">eliminar dispositivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Seguro que desea elimiar el dispositivo</p>{{this.idModel }}
+    </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
-        <button type="submit" class="btn btn-primary" form="createGroupForm">Aceptar</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteDevice(this.id)">Aceptar</button>
+    </div>
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar dispositivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="EditDevice" (ngSubmit)="onSubmitEdit()" autocomplete="off">
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Numero de Modelo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="idModel" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Ubicación</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="ubication">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">nombre de Modulo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="nameModule">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+            </div>
+        </form>
     </div>
 </ng-template>

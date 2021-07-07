@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const device = require('./device.model');
 let rolesValidators = {
     values: ['ADMIN', 'USER'],
-    message: '{VALUE} no es un role valido'
+    message: '{values} no es un role valido'
 }
 
 let connectionValidators = {

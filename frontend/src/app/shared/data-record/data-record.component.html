@@ -1,0 +1,129 @@
+<app-sidebar></app-sidebar>
+
+<div style="margin-left: 60px; margin-top: 30px; margin-right: 1%;" class="algo">
+    <div class="card" style="margin-bottom: 10px;">
+        <div class="card-body">
+            <h5 class="card-title">{{devices.idModel}}</h5>
+
+            <p class="card-text">Content</p>
+        </div>
+    </div>
+
+    <form class="form-inline">
+        <div class="form-group hidden">
+            <div class="input-group">
+                <input name="datepicker" class="form-control" 
+                    ngbDatepicker #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'" 
+                    (dateSelect)="onDateSelection($event)" 
+                    [displayMonths]="1" 
+                    [dayTemplate]="t"
+                    outsideDays="hidden" 
+                    [startDate]="fromDate!" 
+                    tabindex="-1" 
+                    [footerTemplate]="footerTemplate">
+                <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                    </span>
+                </ng-template>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                    [value]="formatter.format(fromDate)" (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                <div class="input-group">
+                    <button disabled class="btn btn-outline-secondary">A:</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                    [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="datepicker.toggle()" type="button">
+                        <fa-icon [icon]="faCalendar"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <ng-template #footerTemplate>
+        <hr class="my-0">
+        <button class="btn btn-primary btn-sm m-2 float-left"
+            (click)="toDate = today; fromDate = '';  datepicker.close();">Hoy</button>
+        <button class="btn btn-secondary btn-sm m-2 float-right" (click)="datepicker.close()">Cerrar</button>
+    </ng-template>
+
+
+    <table class="table table-sm hover" [dtOptions]="dtOptions" datatable>
+        <thead>
+            <tr>
+                <th>Litros por Segundo</th>
+                <th>Metros Cubicos</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of devices.record">
+                <td>{{data.LpS}}</td>
+                <td>{{data.Mc}}</td>
+                <td>{{data.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar dispositivo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="EditDevice" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Numero de Modelo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="idModel" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Ubicación</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="ubication">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label">nombre de Modulo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="nameModule">
+                </div>
+            </div>
+            <div formGroupName="telemetry">
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Wifi</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" formControlName="userWifi">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Contraseña</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" formControlName="passwordWifi">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </div>
+</ng-template>

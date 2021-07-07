@@ -5,8 +5,8 @@ import { ConsoleRoutingModule } from "./console-routing.module";
 import { SharedModule } from '../shared/shared.module';
 import { ListComponent } from './list/list.component';
 import { AddDeviceComponent } from './add-device/add-device.component';
-import { RecordComponent } from './record/record.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -14,14 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ConsoleComponent,
     ListComponent,
-    AddDeviceComponent,
-    RecordComponent
+    AddDeviceComponent
   ],
   imports: [
     CommonModule,
     ConsoleRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ]
 })
 export class ConsoleModule { }

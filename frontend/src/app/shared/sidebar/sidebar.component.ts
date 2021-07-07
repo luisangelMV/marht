@@ -22,7 +22,6 @@ export class SidebarComponent implements OnInit {
   faAdmin = faUserShield;
   faChart = faChartBar;
   faHome  = faHome;
-  faDevice = faMicrochip;
 
   constructor(
     private accountService: AccountService,

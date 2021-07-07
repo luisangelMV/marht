@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountService } from "../account/account.service";
-import { DeviceService } from "../device/device.service";
-import { Group } from '../../models/group';
-import { Account } from 'src/app/models';
+import { Account, Device } from 'src/app/models';
 
 const baseUrl = `${environment.apiUrl}/console`
 
@@ -13,33 +11,42 @@ const baseUrl = `${environment.apiUrl}/console`
   providedIn: 'root'
 })
 export class ConsoleService {
-  private groupSubject: BehaviorSubject<Group>;
-  public group: Observable<Group>;
+  private deviceSubject: BehaviorSubject<Device>;
+  public device: Observable<Device>;
   account: Account;
 
   constructor(
     private http: HttpClient,
-    private accountService: AccountService,
-    private deviceService: DeviceService
+    private accountService: AccountService
   ) { 
     this.accountService.account.subscribe(x => this.account = x);
-    this.groupSubject = new BehaviorSubject<Group>(null);
-    this.group = this.groupSubject.asObservable();
+    this.deviceSubject = new BehaviorSubject<Device>(null);
+    this.device = this.deviceSubject.asObservable();
     
   }
-  
 
-  getGroup(){
+  public get deviceValue(): Device {
+    return this.deviceSubject.value;
+  }
+  getDeviceInfo(id){
     const account = this.accountService.accountValue;
-    return this.http.get<Group>(`${baseUrl}/${account.id}`);
+    return this.http.get(`${baseUrl}/record/${id}`);
   }
-
-  createGroup(params){
-    return this.http.post<Group>(`${baseUrl}/create-group`, params);
-  }
-
-  getAll(){
+  
+  getDevices(){
     const account = this.accountService.accountValue;
     return this.http.get(`${baseUrl}/${account.id}`);
+  }
+
+  deleteDevice(idDevice){
+    return this.http.post(`${baseUrl}/delete-device`, {idDevice,id: this.account.id});
+  }
+
+  addDevice(params) {
+    return this.http.post(`${baseUrl}/add-device`, params);
+  }
+
+  updateDevice(params) {
+    return this.http.post(`${baseUrl}/update-device`, params);
   }
 }

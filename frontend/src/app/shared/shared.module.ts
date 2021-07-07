@@ -5,6 +5,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ModalComponent } from './modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DataRecordComponent } from './data-record/data-record.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -12,17 +14,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    ModalComponent
+    ModalComponent,
+    DataRecordComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    DataTablesModule
   ],
   exports: [
     NavbarComponent,
     SidebarComponent,
-    ModalComponent
+    ModalComponent,
+    DataRecordComponent
   ]
 })
 export class SharedModule { }

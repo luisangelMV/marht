@@ -10,7 +10,6 @@ const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const ProfileModule = () => import('./profile/profile.module').then(x => x.ProfileModule);
 const ConsoleModule = () => import('./console/console.module').then(x => x.ConsoleModule);
-const deviceModule = () => import('./devices/devices.module').then(x => x.DevicesModule);
 
 const routes: Routes = [
   { path: '', component: IndexComponent, pathMatch: 'full' },
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
   { path: 'profile', loadChildren: ProfileModule, canActivate: [AuthGuard] },
   { path: 'console', loadChildren: ConsoleModule, canActivate: [AuthGuard] },
-  { path: 'device', loadChildren: deviceModule, canActivate: [AuthGuard] },
   { path: '**', component: ErrorComponent }
 ];
 
